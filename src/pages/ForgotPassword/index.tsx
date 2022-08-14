@@ -37,8 +37,8 @@ const ForgotPassword: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email("Digite um e-mail válido")
-            .required("E-mail obrigatório"),
+            .email("Enter a valid email address")
+            .required("E-mail required"),
         });
 
         await schema.validate(data, {
@@ -84,7 +84,7 @@ const ForgotPassword: React.FC = () => {
           <img src={logo} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Recuperar senha</h1>
+            <h1>Recover Password</h1>
 
             <Input
               name="email"
@@ -94,13 +94,13 @@ const ForgotPassword: React.FC = () => {
             />
 
             <Button loading={loading} type="submit">
-              Recuperar
+            Recover
             </Button>
           </Form>
 
           <Link to="/">
             <FiLogIn />
-            Voltar ao login
+              Back to login
           </Link>
         </AnimationContainer>
       </Content>
