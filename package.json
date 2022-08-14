@@ -74,5 +74,9 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "prettier": "^2.0.4",
     "react-test-renderer": "^16.13.1"
+  },
+  "resolutions": {
+    "@types/react": "16.9.0",
+    "@types/react-dom": "16.9.0"
   }
 }

@@ -241,7 +241,7 @@ const Dashboard: React.FC = () => {
         </Schedule>
 
         <Calender>
-          {/* <DayPicker
+          <DayPicker
             weekdaysShort={["D", "S", "T", "Q", "Q", "S", "S"]}
             fromMonth={new Date()}
             disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
@@ -265,7 +265,7 @@ const Dashboard: React.FC = () => {
               "Novembro",
               "Dezembro",
             ]}
-          /> */}
+          />
         </Calender>
       </Content>
     </Container>
