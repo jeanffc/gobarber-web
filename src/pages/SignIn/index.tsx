@@ -39,9 +39,10 @@ const SignIn: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email("Digite um e-mail válido")
-            .required("E-mail obrigatório"),
-          password: Yup.string().required("Senha obrigatória"),
+            .email("Enter a valid email address")
+            .required("E-mail required"),
+          password: Yup.string()
+            .required("Password required"),
         });
 
         await schema.validate(data, {
@@ -86,7 +87,7 @@ const SignIn: React.FC = () => {
           <img src={logo} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faça seu logon</h1>
+            <h1>Sign in</h1>
 
             <Input
               name="email"
@@ -98,19 +99,19 @@ const SignIn: React.FC = () => {
               name="password"
               icon={FiLock}
               type="password"
-              placeholder="Senha"
+              placeholder="Password"
             />
 
             <Button loading={loading} type="submit">
-              Entrar
+              Log in
             </Button>
 
-            <Link to="/forgot-password">Esqueci minha senha</Link>
+            <Link to="/forgot-password">I forgot my password</Link>
           </Form>
 
           <Link to="signup">
             <FiLogIn />
-            Criar conta
+            Create an account
           </Link>
         </AnimationContainer>
       </Content>
