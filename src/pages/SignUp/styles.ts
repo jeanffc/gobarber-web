@@ -1,42 +1,59 @@
-import styled from 'styled-components';
-import { shade } from 'polished';
+import styled, { keyframes } from "styled-components";
+import { shade } from "polished";
 
-import signUpBackgroudImg from '../../assets/sign-up-background.png';
+import signUpBackground from "../../assets/sign-up-background.png";
 
 export const Container = styled.div`
   height: 100vh;
+
   display: flex;
   align-items: stretch;
 `;
 
 export const Content = styled.div`
   display: flex;
-  flex-direction: column;
-
-  align-items: center;
   justify-content: center;
 
   width: 100%;
   max-width: 700px;
+`;
+
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+`;
+
+export const AnimationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: ${appearFromRight} 0.7s;
 
   form {
     margin: 80px 0;
     width: 340px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     h1 {
       margin-bottom: 24px;
     }
 
     a {
-      display: block;
       color: #f4ede8;
       margin-top: 24px;
-      text-decoration: none;
-      transition: 0.2s;
+      transition: color 0.2s;
 
       &:hover {
-        color: ${shade(0.2, '#f4ede8')};
+        color: ${shade(0.2, "#f4ede8")};
       }
     }
   }
@@ -45,23 +62,20 @@ export const Content = styled.div`
     color: #f4ede8;
     display: flex;
     align-items: center;
-    margin-top: 24px;
-    text-decoration: none;
-    transition: 0.2s;
-
-    svg {
-      margin-right: 16px;
-    }
+    transition: color 0.2s;
 
     &:hover {
-        color: ${shade(0.2, '#f4ede8')};
-      }
+      color: ${shade(0.2, "#f4ede8")};
+    }
+
+    svg {
+      margin-right: 8px;
     }
   }
 `;
 
 export const Background = styled.div`
   flex: 1;
-  background: url(${signUpBackgroudImg}) no-repeat center;
+  background: url(${signUpBackground}) no-repeat center;
   background-size: cover;
 `;
