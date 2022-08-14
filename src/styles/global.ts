@@ -1,32 +1,45 @@
-import { createGlobalStyle } from 'styled-components';
-
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  *{
+  * {
     margin: 0;
     padding: 0;
     outline: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
   }
 
-  body{
-    background: #312e38;
-    color: #FFF;
-    -webkit-font-smoothing: antialiased !important;
+  *:focus {
+    outline: 0;
   }
 
-  body, input, button{
-    font-family: 'Roboto Slab', sans-serif;
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    background-color: #312e38;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body, input, button {
+    font-family: "Roboto Slab", serif;
     font-size: 16px;
-    font-weight: normal;
   }
 
-  h1, h2, h3, h4, h5, h6, strong{
+  h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;
   }
 
-  button{
+  button {
     cursor: pointer;
   }
 
+  a {
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
 `;

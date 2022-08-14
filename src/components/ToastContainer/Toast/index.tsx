@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect } from "react";
 import {
   FiAlertCircle,
   FiCheckCircle,
   FiInfo,
   FiXCircle,
-} from 'react-icons/fi';
-import { ToastMessage, useToast } from '../../../hooks/toast';
+} from "react-icons/fi";
 
-import { Container } from './styles';
+import { ToastMessage, useToast } from "../../../hooks/toast";
+
+import { Container } from "./styles";
 
 interface ToastProps {
   message: ToastMessage;
@@ -17,8 +17,8 @@ interface ToastProps {
 
 const icons = {
   info: <FiInfo size={24} />,
-  error: <FiAlertCircle size={24} />,
   success: <FiCheckCircle size={24} />,
+  error: <FiAlertCircle size={24} />,
 };
 
 const Toast: React.FC<ToastProps> = ({ message, style }) => {
@@ -29,9 +29,6 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
       removeToast(message.id);
     }, 3000);
 
-    // Se você retornar uma função dentro do useEffect
-    // Ela será executada caso o componente deixe de existir
-    // Similar ao componentDidUnmount
     return () => {
       clearTimeout(timer);
     };
@@ -43,11 +40,13 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
       hasDescription={Number(!!message.description)}
       style={style}
     >
-      {icons[message.type || 'info']}
+      {icons[message.type || "info"]}
+
       <div>
         <strong>{message.title}</strong>
         {message.description && <p>{message.description}</p>}
       </div>
+
       <button onClick={() => removeToast(message.id)} type="button">
         <FiXCircle size={18} />
       </button>

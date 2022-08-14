@@ -1,19 +1,18 @@
-import styled, { keyframes } from 'styled-components';
-import { shade } from 'polished';
+import styled, { keyframes } from "styled-components";
+import { shade } from "polished";
 
-import SignIn from '../../assets/sign-in-background.png';
+import signInBackground from "../../assets/sign-in-background.png";
 
 export const Container = styled.div`
   height: 100vh;
+
   display: flex;
   align-items: stretch;
 `;
 
 export const Content = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
   width: 100%;
   max-width: 700px;
 `;
@@ -22,25 +21,26 @@ const appearFromLeft = keyframes`
   from {
     opacity: 0;
     transform: translateX(-50px);
-
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0px);
   }
 `;
 
 export const AnimationContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  animation: ${appearFromLeft} 1s;
+  animation: ${appearFromLeft} 0.7s;
 
   form {
     margin: 80px 0;
     width: 340px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     h1 {
       margin-bottom: 24px;
@@ -48,40 +48,33 @@ export const AnimationContainer = styled.div`
 
     a {
       color: #f4ede8;
-      display: block;
       margin-top: 24px;
-      text-decoration: none;
       transition: color 0.2s;
 
       &:hover {
-        color: ${shade(0.2, '#f4ede8')};
+        color: ${shade(0.2, "#f4ede8")};
       }
     }
   }
 
   > a {
     color: #ff9000;
-    display: block;
-    margin-top: 24px;
-    text-decoration: none;
-    transition: color 0.2s;
-
     display: flex;
     align-items: center;
     transition: color 0.2s;
 
-    svg {
-      margin-right: 16px;
+    &:hover {
+      color: ${shade(0.2, "#ff9000")};
     }
 
-    &:hover {
-      color: ${shade(0.2, '#ff9000')};
+    svg {
+      margin-right: 8px;
     }
   }
 `;
 
 export const Background = styled.div`
   flex: 1;
-  background: url(${SignIn}) no-repeat center;
+  background: url(${signInBackground}) no-repeat center;
   background-size: cover;
 `;

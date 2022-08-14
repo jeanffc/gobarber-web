@@ -1,37 +1,101 @@
-import styled from 'styled-components';
-import { shade } from 'polished';
+import styled from "styled-components";
+import { shade } from "polished";
 
 export const Container = styled.div``;
+
+export const Header = styled.header`
+  padding: 32px 0;
+  background: #28262e;
+`;
+
+export const HeaderContent = styled.div`
+  max-width: 1120px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  > img {
+    height: 80px;
+  }
+
+  button {
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+
+    svg {
+      color: #999591;
+      height: 20px;
+      width: 20px;
+    }
+  }
+`;
+
+export const Profile = styled.div`
+  margin-left: 80px;
+
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+  }
+
+  div {
+    margin-left: 16px;
+    line-height: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    span {
+      color: #f4ede8;
+    }
+
+    a {
+      color: #ff9000;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+`;
 
 export const Content = styled.main`
   max-width: 1120px;
   margin: 64px auto;
+
   display: flex;
 `;
 
 export const Schedule = styled.div`
-  flex: 1;
   margin-right: 120px;
+
+  flex: 1;
 
   h1 {
     font-size: 36px;
   }
 
   p {
-    margin-top: 8px;
+    margin-top: 32px;
     color: #ff9000;
+    font-weight: 500;
+
     display: flex;
     align-items: center;
-    font-weight: 500;
 
     span {
       display: flex;
       align-items: center;
-      text-transform: capitalize;
     }
 
     span + span::before {
-      content: '';
+      content: "";
       width: 1px;
       height: 12px;
       background: #ff9000;
@@ -45,21 +109,22 @@ export const NextAppointment = styled.div`
 
   > strong {
     color: #999591;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
   }
 
   div {
-    background: #3e3b47;
-    display: flex;
-    align-items: center;
+    background: #3e3b46;
     padding: 16px 24px;
     border-radius: 10px;
     margin-top: 24px;
     position: relative;
 
+    display: flex;
+    align-items: center;
+
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       height: 80%;
       width: 1px;
@@ -81,9 +146,10 @@ export const NextAppointment = styled.div`
 
     span {
       margin-left: auto;
+      color: #999591;
+
       display: flex;
       align-items: center;
-      color: #999591;
 
       svg {
         color: #ff9000;
@@ -93,21 +159,22 @@ export const NextAppointment = styled.div`
   }
 `;
 
-export const Section = styled.div`
+export const Section = styled.section`
   margin-top: 48px;
 
   > strong {
     color: #999591;
     font-size: 20px;
     line-height: 26px;
-    border-bottom: 1px solid #3e3b47;
     display: block;
+    border-bottom: 1px solid #3e3b47;
     padding-bottom: 16px;
     margin-bottom: 16px;
   }
 
   > p {
     color: #999591;
+    font-weight: 400;
   }
 `;
 
@@ -121,10 +188,11 @@ export const Appointment = styled.div`
 
   span {
     margin-left: auto;
+    color: #f4ede8;
+    width: 72px;
+
     display: flex;
     align-items: center;
-    width: 70px;
-    color: #f4ede8;
 
     svg {
       color: #ff9000;
@@ -133,13 +201,14 @@ export const Appointment = styled.div`
   }
 
   div {
-    flex: 1;
-    background: #3e3b47;
-    display: flex;
-    align-items: center;
+    background: #3e3b46;
     padding: 16px 24px;
     border-radius: 10px;
     margin-left: 24px;
+
+    display: flex;
+    align-items: center;
+    flex: 1;
 
     img {
       width: 56px;
@@ -149,13 +218,13 @@ export const Appointment = styled.div`
 
     strong {
       margin-left: 24px;
-      font-size: 20px;
       color: #fff;
+      font-size: 20px;
     }
   }
 `;
 
-export const Calendar = styled.aside`
+export const Calender = styled.aside`
   width: 380px;
 
   .DayPicker {
@@ -191,7 +260,7 @@ export const Calendar = styled.aside`
 
   .DayPicker:not(.DayPicker--interactionDisabled)
     .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
-    background: ${shade(0.2, '#3e3b47')};
+    background: ${shade(0.2, "#3e3b47")};
   }
 
   .DayPicker-Day--today {

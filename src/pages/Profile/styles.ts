@@ -1,46 +1,41 @@
-import styled from 'styled-components';
-import { shade } from 'polished';
+import styled from "styled-components";
+import { shade } from "polished";
 
 export const Container = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-`;
+  > header {
+    height: 144px;
+    background: #28262e;
 
-export const Header = styled.header`
-  height: 144px;
-  background: #28262e;
+    display: flex;
+    align-items: center;
 
-  display: flex;
-  align-items: center;
+    div {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
 
-  div {
-    width: 100%;
-    max-width: 1120px;
-    margin: 0 auto;
-
-    svg {
-      color: #999591;
-      width: 24px;
-      height: 24px;
+      svg {
+        color: #999591;
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 `;
 
 export const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   margin: -176px auto 0;
 
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   form {
     margin: 80px 0;
     width: 340px;
-    text-align: center;
+
     display: flex;
     flex-direction: column;
 
@@ -53,6 +48,16 @@ export const Content = styled.div`
     div:nth-child(5) {
       margin-top: 24px;
     }
+
+    a {
+      color: #f4ede8;
+      margin-top: 24px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: ${shade(0.2, "#f4ede8")};
+      }
+    }
   }
 `;
 
@@ -60,6 +65,7 @@ export const AvatarInput = styled.div`
   margin-bottom: 32px;
   position: relative;
   align-self: center;
+
   img {
     width: 186px;
     height: 186px;
@@ -68,35 +74,32 @@ export const AvatarInput = styled.div`
 
   label {
     position: absolute;
+    right: 0px;
+    bottom: 0px;
     width: 48px;
     height: 48px;
     background: #ff9000;
     border-radius: 50%;
     border: 0;
-    right: 0;
-    bottom: 0;
-    transition: background-color 0.2s;
+    cursor: pointer;
+    transition: background 0.2s;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     input {
       display: none;
     }
 
-    &:hover {
-      cursor: pointer;
-    }
-
     svg {
       width: 20px;
       height: 20px;
-      color: #312e38;
+      color: #312e28;
     }
 
     &:hover {
-      background: ${shade(0.2, '#ff9000')};
+      background: ${shade(0.2, "#ff9000")};
     }
   }
 `;
