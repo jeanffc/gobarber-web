@@ -19,7 +19,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [isFielled, setIsFielled] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+
   const { fieldName, defaultValue, error, registerField } = useField(name);
 
   const handleInputFocus = useCallback(() => {
@@ -29,7 +30,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
 
-    setIsFielled(!!inputRef.current?.value);
+    setIsFilled(!!inputRef.current?.value);
   }, []);
 
   useEffect(() => {
@@ -39,8 +40,9 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
       path: 'value',
     });
   }, [fieldName, registerField]);
+
   return (
-    <Container isErrored={!!error} isFielled={isFielled} isFocused={isFocused}>
+    <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
       {Icon && <Icon size={20} />}
       <input
         onFocus={handleInputFocus}
@@ -50,11 +52,12 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         {...rest}
       />
       {error && (
-        <Error title={error} className="">
+        <Error title={error}>
           <FiAlertCircle color="#c53030" size={20} />
         </Error>
       )}
     </Container>
   );
 };
+
 export default Input;
