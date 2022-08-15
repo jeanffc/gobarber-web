@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { FiPower, FiClock } from 'react-icons/fi';
+import { FiClock } from 'react-icons/fi';
 import { isToday, format, parseISO, isAfter } from 'date-fns';
 import enCA from 'date-fns/locale/en-CA';
 import DayPicker, { DayModifiers } from 'react-day-picker';
@@ -9,14 +9,11 @@ import 'react-day-picker/lib/style.css';
 import api from '../../services/api';
 
 import { useAuth } from '../../hooks/auth';
-
-import logo from '../../assets/logo.svg';
+import Header from '../../components/Header';
+import Button from '../../components/Button';
 
 import {
   Container,
-  Header,
-  HeaderContent,
-  Profile,
   Content,
   Schedule,
   NextAppointment,
@@ -33,7 +30,8 @@ interface MonthAvailabilityItem {
 interface Appointments {
   _id: string;
   date: string;
-  hourFormatted: string;
+  hourFormatted?: string;
+  dateFormatted?: string;
   user: {
     _id: string;
     name: string;
@@ -71,7 +69,9 @@ const Dashboard: React.FC = () => {
       })
       // .get(`/providers/${user._id}/month-availability`)
       .then(response => {
-        setMonthAvailability(response.data);
+        if (response.data) {
+          setMonthAvailability(response.data);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -89,14 +89,17 @@ const Dashboard: React.FC = () => {
       })
       // .get<Appointments[]>(`/appointments/user/${user._id}`)
       .then(response => {
-        const appointmentsFormatted = response.data.map(appointment => {
-          return {
-            ...appointment,
-            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
-          };
-        });
+        if (response.data) {
+          const appointmentsFormatted = response.data.map(appointment => {
+            return {
+              ...appointment,
+              hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+              dateFormatted: format(parseISO(appointment.date), 'yyyy-MM-dd'),
+            };
+          });
 
-        setAppointments(appointmentsFormatted);
+          setAppointments(appointmentsFormatted);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -148,32 +151,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <HeaderContent>
-          <img src={logo} alt="GoBarber" />
-
-          <Profile>
-            <img
-              src={
-                user.avatar_url ||
-                'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
-              }
-              alt={user.name}
-            />
-
-            <div>
-              <span>Welcome,</span>
-              <Link to="/profile">
-                <strong>{user.name}</strong>
-              </Link>
-            </div>
-          </Profile>
-
-          <button type="button" onClick={signOut}>
-            <FiPower />
-          </button>
-        </HeaderContent>
-      </Header>
+      <Header />
 
       <Content>
         <Schedule>
@@ -200,6 +178,7 @@ const Dashboard: React.FC = () => {
                 <span>
                   <FiClock />
                   {nextAppointment.hourFormatted}
+                  <span>{nextAppointment.dateFormatted}</span>
                 </span>
               </div>
             </NextAppointment>
@@ -225,8 +204,10 @@ const Dashboard: React.FC = () => {
                     }
                     alt={appointment.user.name}
                   />
-
-                  <strong>{appointment.user.name}</strong>
+                  <div>
+                    <strong>{appointment.user.name}</strong>
+                    <span>{appointment.dateFormatted}</span>
+                  </div>
                 </div>
               </Appointment>
             ))}
@@ -256,6 +237,7 @@ const Dashboard: React.FC = () => {
                   />
 
                   <strong>{appointment.user.name}</strong>
+                  <span>{appointment.dateFormatted}</span>
                 </div>
               </Appointment>
             ))}
@@ -263,6 +245,10 @@ const Dashboard: React.FC = () => {
         </Schedule>
 
         <Calender>
+          <Link to="/providers">
+            <Button>New Schedule</Button>
+          </Link>
+
           <DayPicker
             weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
             fromMonth={new Date()}
