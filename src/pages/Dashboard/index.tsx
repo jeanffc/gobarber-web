@@ -40,7 +40,7 @@ interface Appointments {
 }
 
 const Dashboard: React.FC = () => {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
       .get(`/providers/${user._id}/month-availability`, {
         params: {
           year: currentMonth.getFullYear(),
-          month: currentMonth.getMonth() + 1,
+          month: currentMonth.getMonth(),
         },
       })
       // .get(`/providers/${user._id}/month-availability`)
@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
       .get<Appointments[]>(`/appointments/user/${user._id}`, {
         params: {
           year: selectedDate.getFullYear(),
-          month: selectedDate.getMonth() + 1,
+          month: selectedDate.getMonth(),
           day: selectedDate.getDate(),
         },
       })
