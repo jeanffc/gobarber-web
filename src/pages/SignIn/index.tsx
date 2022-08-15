@@ -1,21 +1,21 @@
-import React, { useRef, useState, useCallback } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { FiLogIn, FiMail, FiLock } from "react-icons/fi";
-import { Form } from "@unform/web";
-import { FormHandles } from "@unform/core";
-import * as Yup from "yup";
+import React, { useRef, useState, useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
-import { useAuth } from "../../hooks/auth";
-import { useToast } from "../../hooks/toast";
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
-import getValidationErrors from "../../utils/getValidationErrors";
+import getValidationErrors from '../../utils/getValidationErrors';
 
-import logo from "../../assets/logo.svg";
+import logo from '../../assets/logo.svg';
 
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import { Container, Content, AnimationContainer, Background } from "./styles";
+import { Container, Content, AnimationContainer, Background } from './styles';
 
 interface SignInFormData {
   email: string;
@@ -39,10 +39,9 @@ const SignIn: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email("Enter a valid email address")
-            .required("E-mail required"),
-          password: Yup.string()
-            .required("Password required"),
+            .email('Enter a valid email address')
+            .required('E-mail required'),
+          password: Yup.string().required('Password required'),
         });
 
         await schema.validate(data, {
@@ -58,7 +57,7 @@ const SignIn: React.FC = () => {
 
         setLoading(false);
 
-        history.push("/dashboard");
+        history.push('/dashboard');
       } catch (err) {
         setLoading(false);
 
@@ -71,9 +70,9 @@ const SignIn: React.FC = () => {
         }
 
         addToast({
-          type: "error",
-          title: "Error",
-          description: "There was an error logging in, check credentials",
+          type: 'error',
+          title: 'Error',
+          description: 'There was an error logging in, check credentials',
         });
       }
     },
