@@ -235,3 +235,24 @@ export const Calender = styled.aside`
     color: #232129 !important;
   }
 `;
+
+interface SelectHourButtonProps {
+  selected?: boolean;
+}
+
+export const SelectHourButton = styled.button<SelectHourButtonProps>`
+  color: #f4ede8;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 0;
+  padding: 4px 10px;
+  height: 28px;
+  width: 100%;
+  transition: 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#3e3b47')};
+  }
+
+  background: ${props => (props.selected ? '#ff9000' : '#3e3b47')};
+`;

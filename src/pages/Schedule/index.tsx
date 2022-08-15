@@ -16,6 +16,7 @@ import {
   ContentSchedule,
   Section,
   Calender,
+  SelectHourButton,
 } from './styles';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
@@ -27,6 +28,7 @@ interface MonthAvailabilityItem {
 
 const Schedule: React.FC = () => {
   const { user } = useAuth();
+  const [selectedHour, setSelectedHour] = useState('08');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [monthAvailability, setMonthAvailability] = useState<
@@ -60,6 +62,10 @@ const Schedule: React.FC = () => {
       locale: enCA,
     });
   }, [selectedDate]);
+
+  const handleHourChange = useCallback((hour: string) => {
+    setSelectedHour(hour);
+  }, []);
 
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available && !modifiers.disabled) {
@@ -116,7 +122,7 @@ const Schedule: React.FC = () => {
 
       <Content>
         <ContentSchedule>
-          <h1>Select a Schedule</h1>
+          <h1>Select a Date</h1>
           <p>
             {isToday(selectedDate) && <span>Today</span>}
             <span>{selectedDateAsText}</span>
@@ -125,10 +131,46 @@ const Schedule: React.FC = () => {
 
           <Section>
             <strong>Morning</strong>
+            <SelectHourButton
+              selected={selectedHour === '08'}
+              onClick={() => handleHourChange('08')}
+            >
+              08:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === '09'}
+              onClick={() => handleHourChange('09')}
+            >
+              09:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === '10'}
+              onClick={() => handleHourChange('10')}
+            >
+              10:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === '11'}
+              onClick={() => handleHourChange('11')}
+            >
+              11:00
+            </SelectHourButton>
           </Section>
 
           <Section>
             <strong>Afternoon</strong>
+            <SelectHourButton
+              selected={selectedHour === '13'}
+              onClick={() => handleHourChange('13')}
+            >
+              13:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === '14'}
+              onClick={() => handleHourChange('14')}
+            >
+              14:00
+            </SelectHourButton>
           </Section>
 
           <Section>

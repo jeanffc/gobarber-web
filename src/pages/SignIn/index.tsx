@@ -105,7 +105,7 @@ const SignIn: React.FC = () => {
               Log in
             </Button>
 
-            <Link to="/forgot-password">I forgot my password</Link>
+            {/* <Link to="/forgot-password">I forgot my password</Link> */}
           </Form>
 
           <Link to="signup">
