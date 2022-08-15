@@ -1,5 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { isToday, format, parseISO, isAfter } from 'date-fns';
+import enCA from 'date-fns/locale/en-CA';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import { FiArrowLeft } from 'react-icons/fi';
 import 'react-day-picker/lib/style.css';
@@ -47,6 +49,18 @@ const Schedule: React.FC = () => {
     return dates;
   }, [currentMonth, monthAvailability]);
 
+  const selectedDateAsText = useMemo(() => {
+    return format(selectedDate, "'Day' dd 'of' MMMM", {
+      locale: enCA,
+    });
+  }, [selectedDate]);
+
+  const selectedWeekDay = useMemo(() => {
+    return format(selectedDate, 'cccc', {
+      locale: enCA,
+    });
+  }, [selectedDate]);
+
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available && !modifiers.disabled) {
       setSelectedDate(day);
@@ -66,7 +80,9 @@ const Schedule: React.FC = () => {
         date: '2022-08-15T19:08:00.000+00:00', // TODO: update date dynamically
       };
 
-      await api.post('appointments', data);
+      // await api.post('appointments', data);
+      console.log(data);
+      console.log(selectedDate);
 
       addToast({
         type: 'success',
@@ -74,7 +90,7 @@ const Schedule: React.FC = () => {
         description: 'Congratulations!',
       });
 
-      history.push('/');
+      // history.push('/');
     } catch (error) {
       console.log(error);
 
@@ -101,6 +117,11 @@ const Schedule: React.FC = () => {
       <Content>
         <ContentSchedule>
           <h1>Select a Schedule</h1>
+          <p>
+            {isToday(selectedDate) && <span>Today</span>}
+            <span>{selectedDateAsText}</span>
+            <span>{selectedWeekDay}</span>
+          </p>
 
           <Section>
             <strong>Morning</strong>
