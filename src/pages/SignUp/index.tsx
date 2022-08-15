@@ -1,22 +1,22 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { FiArrowLeft, FiUser, FiMail, FiLock } from "react-icons/fi";
-import { Form } from "@unform/web";
-import { FormHandles } from "@unform/core";
-import * as Yup from "yup";
+import React, { useCallback, useRef, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { FiArrowLeft, FiUser, FiMail, FiLock } from 'react-icons/fi';
+import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
-import { useToast } from "../../hooks/toast";
+import { useToast } from '../../hooks/toast';
 
-import getValidationErrors from "../../utils/getValidationErrors";
+import getValidationErrors from '../../utils/getValidationErrors';
 
-import logo from "../../assets/logo.svg";
+import logo from '../../assets/logo.svg';
 
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import { Container, Content, AnimationContainer, Background } from "./styles";
+import { Container, Content, AnimationContainer, Background } from './styles';
 
 interface SignUpFormData {
   name: string;
@@ -39,14 +39,13 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string()
-            .required("Name required"),
+          name: Yup.string().required('Name required'),
           email: Yup.string()
-            .required("E-mail required")
-            .email("Enter a valid email address"),
+            .required('E-mail required')
+            .email('Enter a valid email address'),
           password: Yup.string()
-            .required("Password required")
-            .min(6, "At least 6 digits"),
+            .required('Password required')
+            .min(6, 'At least 6 digits'),
         });
 
         await schema.validate(data, {
@@ -55,17 +54,17 @@ const SignUp: React.FC = () => {
 
         setLoading(true);
 
-        await api.post("users", data);
+        await api.post('users', data);
 
         addToast({
-          type: "success",
-          title: "Success",
-          description: "You can login to GoBarber",
+          type: 'success',
+          title: 'Success',
+          description: 'You can login to GoBarber',
         });
 
         setLoading(false);
 
-        history.push("/");
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           setLoading(false);
@@ -78,9 +77,10 @@ const SignUp: React.FC = () => {
         }
 
         addToast({
-          type: "error",
-          title: "Error",
-          description: "An error occurred while registering, check your details",
+          type: 'error',
+          title: 'Error',
+          description:
+            'An error occurred while registering, check your details',
         });
       }
     },
@@ -98,12 +98,7 @@ const SignUp: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Sign up</h1>
 
-            <Input
-              name="name" 
-              icon={FiUser} 
-              type="text" 
-              placeholder="Name" 
-            />
+            <Input name="name" icon={FiUser} type="text" placeholder="Name" />
             <Input
               name="email"
               icon={FiMail}
@@ -124,9 +119,8 @@ const SignUp: React.FC = () => {
 
           <Link to="/">
             <FiArrowLeft />
-              Back to login
+            Back to login
           </Link>
-
         </AnimationContainer>
       </Content>
     </Container>

@@ -10,6 +10,7 @@ import ResetPassword from '../pages/ResetPassword';
 import Providers from '../pages/Providers';
 import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/Profile';
+import Schedule from '../pages/Schedule';
 
 const Routes: React.FC = () => {
   return (
@@ -19,9 +20,11 @@ const Routes: React.FC = () => {
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/reset-password" component={ResetPassword} />
 
-      <Route path="/providers" component={Providers} isPrivate />
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
+
+      <Route path="/providers" component={Providers} isPrivate />
+      <Route path="/schedule" component={Schedule} isPrivate />
     </Switch>
   );
 };

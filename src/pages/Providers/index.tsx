@@ -53,15 +53,19 @@ const Providers: React.FC = () => {
           <h1>Select a barber</h1>
 
           <Section>
-            {providers.length === 0 && <p>No provider</p>}
+            {providers.length === 0 && <p>No barbers</p>}
 
             {providers.map(provider => (
-              <ProviderContainer key={`provider-${provider._id}`}>
-                <div>
-                  <img src={provider.avatar_url} alt={provider.name} />
-                  <strong>{provider.name}</strong>
-                </div>
-              </ProviderContainer>
+              <div key={`provider-${provider._id}`}>
+                <Link to="/schedule">
+                  <ProviderContainer>
+                    <div>
+                      <img src={provider.avatar_url} alt={provider.name} />
+                      <strong>{provider.name}</strong>
+                    </div>
+                  </ProviderContainer>
+                </Link>
+              </div>
             ))}
           </Section>
         </Schedule>
