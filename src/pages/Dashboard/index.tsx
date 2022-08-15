@@ -153,7 +153,13 @@ const Dashboard: React.FC = () => {
           <img src={logo} alt="GoBarber" />
 
           <Profile>
-            <img src={user.avatar_url} alt={user.name} />
+            <img
+              src={
+                user.avatar_url ||
+                'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
+              }
+              alt={user.name}
+            />
 
             <div>
               <span>Welcome,</span>
@@ -183,7 +189,10 @@ const Dashboard: React.FC = () => {
               <strong>Next</strong>
               <div>
                 <img
-                  src={nextAppointment.user.avatar_url}
+                  src={
+                    nextAppointment.user.avatar_url ||
+                    'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
+                  }
                   alt={nextAppointment.user.name}
                 />
 
@@ -210,7 +219,10 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={
+                      appointment.user.avatar_url ||
+                      'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
+                    }
                     alt={appointment.user.name}
                   />
 
@@ -236,7 +248,10 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={
+                      appointment.user.avatar_url ||
+                      'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
+                    }
                     alt={appointment.user.name}
                   />
 
