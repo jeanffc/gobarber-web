@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiPower } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 import 'react-day-picker/lib/style.css';
 
 import api from '../../services/api';
 
 import { useAuth } from '../../hooks/auth';
 
-import logo from '../../assets/logo.svg';
-
 import {
   Container,
-  Header,
-  HeaderContent,
-  Profile,
   Content,
   Schedule,
   Section,
@@ -45,31 +40,17 @@ const Providers: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <HeaderContent>
+      <header>
+        <div>
           <Link to="/dashboard">
-            <img src={logo} alt="GoBarber" />
+            <FiArrowLeft />
           </Link>
-          <Profile>
-            <img src={user.avatar_url} alt={user.name} />
-
-            <div>
-              <span>Bem-vindo,</span>
-              <Link to="/profile">
-                <strong>{user.name}</strong>
-              </Link>
-            </div>
-          </Profile>
-
-          <button type="button" onClick={signOut}>
-            <FiPower />
-          </button>
-        </HeaderContent>
-      </Header>
+        </div>
+      </header>
 
       <Content>
         <Schedule>
-          <h1>Barbers</h1>
+          <h1>Select a barber</h1>
 
           <Section>
             {providers.length === 0 && <p>No provider</p>}
