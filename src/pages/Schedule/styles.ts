@@ -245,9 +245,9 @@ export const SelectHourButton = styled.button<SelectHourButtonProps>`
   font-weight: 500;
   border-radius: 4px;
   border: 0;
+  margin-right: 10px;
   padding: 4px 10px;
   height: 28px;
-  width: 100%;
   transition: 0.2s;
 
   &:hover {
