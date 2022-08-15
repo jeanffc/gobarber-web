@@ -120,7 +120,7 @@ const Dashboard: React.FC = () => {
   }, [currentMonth, monthAvailability]);
 
   const selectedDateAsText = useMemo(() => {
-    return format(selectedDate, "'Day' dd 'de' MMMM", {
+    return format(selectedDate, "'Day' dd 'of' MMMM", {
       locale: enCA,
     });
   }, [selectedDate]);
