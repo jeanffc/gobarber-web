@@ -28,7 +28,7 @@ interface MonthAvailabilityItem {
 
 const Schedule: React.FC = () => {
   const { user } = useAuth();
-  const [selectedHour, setSelectedHour] = useState('08');
+  const [selectedHour, setSelectedHour] = useState(8);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [monthAvailability, setMonthAvailability] = useState<
@@ -63,7 +63,7 @@ const Schedule: React.FC = () => {
     });
   }, [selectedDate]);
 
-  const handleHourChange = useCallback((hour: string) => {
+  const handleHourChange = useCallback((hour: number) => {
     setSelectedHour(hour);
   }, []);
 
@@ -83,12 +83,10 @@ const Schedule: React.FC = () => {
       const data = {
         provider_id: '62fa6887c5e6fab497188d9c', // TODO: update provider id dynamically
         user_id: user._id,
-        date: '2022-08-15T19:08:00.000+00:00', // TODO: update date dynamically
+        date: new Date(selectedDate.setHours(selectedHour, 0, 0)),
       };
 
-      // await api.post('appointments', data);
-      console.log(data);
-      console.log(selectedDate);
+      await api.post('appointments', data);
 
       addToast({
         type: 'success',
@@ -96,10 +94,8 @@ const Schedule: React.FC = () => {
         description: 'Congratulations!',
       });
 
-      // history.push('/');
+      history.push('/');
     } catch (error) {
-      console.log(error);
-
       addToast({
         type: 'error',
         title: 'Error',
@@ -132,26 +128,26 @@ const Schedule: React.FC = () => {
           <Section>
             <strong>Morning</strong>
             <SelectHourButton
-              selected={selectedHour === '08'}
-              onClick={() => handleHourChange('08')}
+              selected={selectedHour === 8}
+              onClick={() => handleHourChange(8)}
             >
               08:00
             </SelectHourButton>
             <SelectHourButton
-              selected={selectedHour === '09'}
-              onClick={() => handleHourChange('09')}
+              selected={selectedHour === 9}
+              onClick={() => handleHourChange(9)}
             >
               09:00
             </SelectHourButton>
             <SelectHourButton
-              selected={selectedHour === '10'}
-              onClick={() => handleHourChange('10')}
+              selected={selectedHour === 10}
+              onClick={() => handleHourChange(10)}
             >
               10:00
             </SelectHourButton>
             <SelectHourButton
-              selected={selectedHour === '11'}
-              onClick={() => handleHourChange('11')}
+              selected={selectedHour === 11}
+              onClick={() => handleHourChange(11)}
             >
               11:00
             </SelectHourButton>
@@ -160,14 +156,14 @@ const Schedule: React.FC = () => {
           <Section>
             <strong>Afternoon</strong>
             <SelectHourButton
-              selected={selectedHour === '13'}
-              onClick={() => handleHourChange('13')}
+              selected={selectedHour === 13}
+              onClick={() => handleHourChange(13)}
             >
               13:00
             </SelectHourButton>
             <SelectHourButton
-              selected={selectedHour === '14'}
-              onClick={() => handleHourChange('14')}
+              selected={selectedHour === 14}
+              onClick={() => handleHourChange(14)}
             >
               14:00
             </SelectHourButton>
