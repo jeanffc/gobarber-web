@@ -63,12 +63,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      .get(`/providers/${user._id}/month-availability`, {
-        params: {
-          year: currentMonth.getFullYear(),
-          month: currentMonth.getMonth() + 1,
-        },
-      })
+      .get(`/providers/${user._id}/month-availability`)
       .then(response => {
         setMonthAvailability(response.data);
       })
@@ -79,14 +74,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      // .get<Appointments[]>('/appointments/me', {
-      .get<Appointments[]>(`/appointments/user/${user._id}`, {
-        params: {
-          year: selectedDate.getFullYear(),
-          month: selectedDate.getMonth() + 1,
-          day: selectedDate.getDate(),
-        },
-      })
+      .get<Appointments[]>(`/appointments/user/${user._id}`)
       .then(response => {
         const appointmentsFormatted = response.data.map(appointment => {
           return {
