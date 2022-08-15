@@ -60,7 +60,13 @@ const Providers: React.FC = () => {
                 <Link to="/schedule">
                   <ProviderContainer>
                     <div>
-                      <img src={provider.avatar_url} alt={provider.name} />
+                      <img
+                        src={
+                          provider.avatar_url ||
+                          'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
+                        }
+                        alt={provider.name}
+                      />
                       <strong>{provider.name}</strong>
                     </div>
                   </ProviderContainer>

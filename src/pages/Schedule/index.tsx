@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { isToday, format, parseISO, isAfter } from 'date-fns';
+import { isToday, format } from 'date-fns';
 import enCA from 'date-fns/locale/en-CA';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import { FiArrowLeft } from 'react-icons/fi';
