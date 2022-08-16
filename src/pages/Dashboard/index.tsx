@@ -20,7 +20,7 @@ import {
   Section,
   Appointment,
   Calender,
-  IconContainer
+  IconContainer,
 } from './styles';
 import EditModal from '../../components/EditModal';
 import DeleteDialog from '../../components/DeleteDialog';
@@ -48,7 +48,9 @@ const Dashboard: React.FC = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedAppointment, setSelectedAppointment] = useState({} as Appointments);
+  const [selectedAppointment, setSelectedAppointment] = useState(
+    {} as Appointments,
+  );
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
@@ -125,7 +127,7 @@ const Dashboard: React.FC = () => {
   }, [currentMonth, monthAvailability]);
 
   const selectedDateAsText = useMemo(() => {
-    return format(selectedDate, "MMMM dd", {
+    return format(selectedDate, 'MMMM dd', {
       locale: enCA,
     });
   }, [selectedDate]);
@@ -157,12 +159,12 @@ const Dashboard: React.FC = () => {
   const editAppointment = (data: Appointments) => {
     setSelectedAppointment(data);
     setModalIsOpen(true);
-  }
+  };
 
   const deleteAppointment = (data: Appointments) => {
     setSelectedAppointment(data);
     setDialogIsOpen(true);
-  }
+  };
 
   return (
     <Container>
@@ -256,9 +258,10 @@ const Dashboard: React.FC = () => {
                     }
                     alt={appointment.user.name}
                   />
-
-                  <strong>{appointment.user.name}</strong>
-                  <span>{appointment.dateFormatted}</span>
+                  <div>
+                    <strong>{appointment.user.name}</strong>
+                    <span>{appointment.dateFormatted}</span>
+                  </div>
                   <IconContainer onClick={() => editAppointment(appointment)}>
                     <FiEdit color="#f4ede8" />
                   </IconContainer>
