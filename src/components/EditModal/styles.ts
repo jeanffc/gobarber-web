@@ -1,19 +1,15 @@
-import styled from 'styled-components';
 import { shade } from 'polished';
-
-export const Container = styled.div``;
+import styled from 'styled-components';
 
 export const Content = styled.main`
   max-width: 1120px;
-  margin: 64px auto;
-  padding-bottom: 64px;
 
   display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
 `;
 
-export const Schedule = styled.div`
-  margin-right: 120px;
-
+export const ContentSchedule = styled.div`
   flex: 1;
 
   h1 {
@@ -43,61 +39,6 @@ export const Schedule = styled.div`
   }
 `;
 
-export const NextAppointment = styled.div`
-  margin-top: 64px;
-
-  > strong {
-    color: #999591;
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  div {
-    background: #3e3b46;
-    padding: 16px 24px;
-    border-radius: 10px;
-    margin-top: 24px;
-    position: relative;
-
-    display: flex;
-    align-items: center;
-
-    &::before {
-      content: '';
-      position: absolute;
-      height: 80%;
-      width: 1px;
-      left: 0;
-      top: 10%;
-      background: #ff9000;
-    }
-
-    img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-    }
-
-    strong {
-      margin-left: 24px;
-      color: #fff;
-    }
-
-    span {
-      margin-left: auto;
-      color: #999591;
-
-      display: flex;
-      align-items: center;
-
-      svg {
-        color: #ff9000;
-        margin-right: 8px;
-      }
-    }
-  }
-`;
-
 export const Section = styled.section`
   margin-top: 48px;
 
@@ -117,49 +58,25 @@ export const Section = styled.section`
   }
 `;
 
-export const Appointment = styled.div`
-  display: flex;
-  align-items: center;
+interface SelectHourButtonProps {
+  selected?: boolean;
+}
 
-  & + div {
-    margin-top: 16px;
+export const SelectHourButton = styled.button<SelectHourButtonProps>`
+  color: #f4ede8;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 0;
+  margin-right: 10px;
+  padding: 4px 10px;
+  height: 28px;
+  transition: 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#3e3b47')};
   }
 
-  span {
-    margin-left: auto;
-    color: #f4ede8;
-
-    display: flex;
-    align-items: center;
-
-    svg {
-      color: #ff9000;
-      margin-right: 8px;
-    }
-  }
-
-  div {
-    background: #3e3b46;
-    padding: 16px 24px;
-    border-radius: 10px;
-    margin-left: 24px;
-
-    display: flex;
-    align-items: center;
-    flex: 1;
-
-    img {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-    }
-
-    strong {
-      margin-left: 24px;
-      color: #fff;
-      font-size: 20px;
-    }
-  }
+  background: ${props => (props.selected ? '#ff9000' : '#3e3b47')};
 `;
 
 export const Calender = styled.aside`
@@ -217,10 +134,11 @@ export const Calender = styled.aside`
   }
 `;
 
-export const IconContainer = styled.span`
-  cursor: pointer;
-
-  >svg:hover {
-    color: #ff9000 !important;
-  }
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 5px;
+  background: transparent;
+  color: #ffffff;
+  border: 0;
 `;
