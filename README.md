@@ -24,6 +24,9 @@ This project uses:
 - Unform
 - Yup
 - Axios
+- Editorconfig
+- Eslint
+- Prettier
 
 ## 🚀 Install
 
@@ -64,6 +67,11 @@ npm start
 # or
 yarn start
 ```
+
+## Next Steps
+
+[ ] Create Barber user vision
+[ ] Display only time slots available by Barber
 
 ## 📝 Team
 
