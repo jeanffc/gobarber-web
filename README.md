@@ -12,8 +12,8 @@
 
 This is a study project based on a Barber shop:
 
-- To see the web client, click here: [GoBarber Web](https://github.com/jeanffc/gobarber-web)
-- To see the mobile client, click here: [GoBarber API](https://github.com/jeanlsilva/wddm-120-capstone)
+- To see the web project, click here: [GoBarber Web](https://github.com/jeanffc/gobarber-web)
+- To see the api project, click here: [GoBarber API](https://github.com/jeanlsilva/wddm-120-capstone)
 
 ## 📌 Technologies
 
