@@ -1,10 +1,10 @@
-import React from "react";
-import Modal from "react-modal";
-import { useHistory } from "react-router-dom";
-import { useToast } from "../../hooks/toast";
-import api from "../../services/api";
-import Button from "../Button";
-import { ButtonsContainer, Container } from "./styles";
+import React from 'react';
+import Modal from 'react-modal';
+import { useHistory } from 'react-router-dom';
+import { useToast } from '../../hooks/toast';
+import api from '../../services/api';
+import Button from '../Button';
+import { ButtonsContainer, Container } from './styles';
 
 const customStyles = {
   content: {
@@ -15,6 +15,8 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    padding: '40px',
+    borderRadius: '20px',
   },
 };
 
@@ -26,7 +28,11 @@ interface DeleteDialogProps {
   appointmentId: string;
 }
 
-const DeleteDialog: React.FC<DeleteDialogProps> = ({ dialogIsOpen, setDialogIsOpen, appointmentId }) => {
+const DeleteDialog: React.FC<DeleteDialogProps> = ({
+  dialogIsOpen,
+  setDialogIsOpen,
+  appointmentId,
+}) => {
   const { addToast } = useToast();
   const { push } = useHistory();
 
@@ -48,10 +54,14 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ dialogIsOpen, setDialogIsOp
         description: 'An error occurred while schedulling, check your details',
       });
     }
-  }
+  };
 
   return (
-    <Modal isOpen={dialogIsOpen} onRequestClose={() => setDialogIsOpen(false)} style={customStyles}>
+    <Modal
+      isOpen={dialogIsOpen}
+      onRequestClose={() => setDialogIsOpen(false)}
+      style={customStyles}
+    >
       <Container>
         <h2>Are you sure you want to delete this appointment?</h2>
         <ButtonsContainer>
@@ -60,7 +70,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ dialogIsOpen, setDialogIsOp
         </ButtonsContainer>
       </Container>
     </Modal>
-  )
-}
+  );
+};
 
 export default DeleteDialog;
