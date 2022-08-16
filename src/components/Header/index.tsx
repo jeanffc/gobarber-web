@@ -9,7 +9,7 @@ import { HeaderContainer, HeaderContent, Profile } from './styles';
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
-  console.log('user = ', user);
+
   return (
     <HeaderContainer>
       <HeaderContent>
