@@ -97,7 +97,7 @@ const EditModal: React.FC<EditModalProps> = ({
   }, []);
 
   const selectedDateAsText = useMemo(() => {
-    return format(selectedDate, "'Day' dd 'of' MMMM", {
+    return format(selectedDate, "MMMM dd", {
       locale: enCA,
     });
   }, [selectedDate]);

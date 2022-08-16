@@ -57,7 +57,7 @@ const Providers: React.FC = () => {
 
             {providers.map(provider => (
               <div key={`provider-${provider._id}`}>
-                <Link to="/schedule">
+                <Link to={`/schedule/${provider._id}`}>
                   <ProviderContainer>
                     <div>
                       <img

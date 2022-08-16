@@ -26,6 +26,7 @@ export const Container = styled.div`
 export const Content = styled.main`
   max-width: 1120px;
   margin: 64px auto;
+  padding-bottom: 64px;
 
   display: flex;
   align-items: center;
@@ -81,9 +82,13 @@ export const ProviderContainer = styled.div`
     border-radius: 10px;
     margin-top: 24px;
     position: relative;
-
+    transition: background .5s;
     display: flex;
     align-items: center;
+
+    &:hover {
+      background: ${shade(0.4, '#3e3b46')};
+    }
 
     &::before {
       content: '';
@@ -99,6 +104,7 @@ export const ProviderContainer = styled.div`
       width: 80px;
       height: 80px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     strong {
@@ -176,6 +182,7 @@ export const Appointment = styled.div`
       width: 56px;
       height: 56px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     strong {

@@ -41,6 +41,11 @@ export interface Appointments {
     name: string;
     avatar_url: string;
   };
+  provider: {
+    _id: string;
+    name: string;
+    avatar_url: string;
+  }
 }
 
 const Dashboard: React.FC = () => {
@@ -186,13 +191,13 @@ const Dashboard: React.FC = () => {
               <div>
                 <img
                   src={
-                    nextAppointment.user.avatar_url ||
+                    nextAppointment.provider.avatar_url ||
                     'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
                   }
-                  alt={nextAppointment.user.name}
+                  alt={nextAppointment.provider.name}
                 />
 
-                <strong>{nextAppointment.user.name}</strong>
+                <strong>{nextAppointment.provider.name}</strong>
                 <DateTimeContainer>
                   <FiClock />
                   {nextAppointment.hourFormatted}
@@ -217,13 +222,13 @@ const Dashboard: React.FC = () => {
                 <div>
                   <img
                     src={
-                      appointment.user.avatar_url ||
+                      appointment.provider.avatar_url ||
                       'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
                     }
-                    alt={appointment.user.name}
+                    alt={appointment.provider.name}
                   />
                   <div>
-                    <strong>{appointment.user.name}</strong>
+                    <strong>{appointment.provider.name}</strong>
                     <span>{appointment.dateFormatted}</span>
                   </div>
                   <IconContainer onClick={() => editAppointment(appointment)}>
@@ -254,13 +259,13 @@ const Dashboard: React.FC = () => {
                 <div>
                   <img
                     src={
-                      appointment.user.avatar_url ||
+                      appointment.provider.avatar_url ||
                       'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
                     }
-                    alt={appointment.user.name}
+                    alt={appointment.provider.name}
                   />
                   <div>
-                    <strong>{appointment.user.name}</strong>
+                    <strong>{appointment.provider.name}</strong>
                     <span>{appointment.dateFormatted}</span>
                   </div>
                   <IconContainer onClick={() => editAppointment(appointment)}>

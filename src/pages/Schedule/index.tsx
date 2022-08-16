@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { isToday, format } from 'date-fns';
 import enCA from 'date-fns/locale/en-CA';
 import DayPicker, { DayModifiers } from 'react-day-picker';
@@ -37,6 +37,7 @@ const Schedule: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
   const history = useHistory();
+  const params = useParams<{id: string}>();
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
@@ -81,7 +82,7 @@ const Schedule: React.FC = () => {
     setLoading(true);
     try {
       const data = {
-        provider_id: '62fa6887c5e6fab497188d9c', // TODO: update provider id dynamically
+        provider_id: params.id, // TODO: update provider id dynamically
         user_id: user._id,
         date: new Date(selectedDate.setHours(selectedHour, 0, 0)),
       };
@@ -91,7 +92,7 @@ const Schedule: React.FC = () => {
       addToast({
         type: 'success',
         title: 'Success',
-        description: 'Congratulations!',
+        description: 'Appointment successfully scheduled!',
       });
 
       history.push('/');
