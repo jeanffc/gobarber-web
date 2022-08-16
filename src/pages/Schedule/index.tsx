@@ -183,7 +183,7 @@ const Schedule: React.FC = () => {
 
           <Section>
             <Button loading={loading} onClick={handleSubmit}>
-              Save Schedule
+              Save
             </Button>
           </Section>
         </ContentSchedule>
