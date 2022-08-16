@@ -70,8 +70,8 @@ yarn start
 
 ## Next Steps
 
-[ ] Create Barber user vision
-[ ] Display only time slots available by Barber
+- [ ] Create Barber user vision
+- [ ] Display only time slots available by Barber
 
 ## 📝 Team
 
