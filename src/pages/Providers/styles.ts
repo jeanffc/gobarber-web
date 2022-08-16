@@ -28,6 +28,10 @@ export const Content = styled.main`
   margin: 64px auto;
 
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap-reverse;
 `;
 
 export const Schedule = styled.div`
@@ -184,6 +188,7 @@ export const Appointment = styled.div`
 
 export const Calender = styled.aside`
   width: 380px;
+  margin-bottom: 64px;
 
   .DayPicker {
     background: #28262e;

@@ -9,6 +9,10 @@ export const Content = styled.main`
   padding-bottom: 64px;
 
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap-reverse;
 `;
 
 export const Schedule = styled.div`
@@ -164,6 +168,7 @@ export const Appointment = styled.div`
 
 export const Calender = styled.aside`
   width: 380px;
+  margin-bottom: 64px;
 
   .DayPicker {
     background: #28262e;
@@ -220,7 +225,7 @@ export const Calender = styled.aside`
 export const IconContainer = styled.span`
   cursor: pointer;
 
-  >svg:hover {
+  > svg:hover {
     color: #ff9000 !important;
   }
 `;
