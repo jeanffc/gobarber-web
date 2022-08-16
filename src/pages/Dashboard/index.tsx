@@ -21,6 +21,7 @@ import {
   Appointment,
   Calender,
   IconContainer,
+  DateTimeContainer
 } from './styles';
 import EditModal from '../../components/EditModal';
 import DeleteDialog from '../../components/DeleteDialog';
@@ -192,11 +193,11 @@ const Dashboard: React.FC = () => {
                 />
 
                 <strong>{nextAppointment.user.name}</strong>
-                <span>
+                <DateTimeContainer>
                   <FiClock />
                   {nextAppointment.hourFormatted}
                   <span>{nextAppointment.dateFormatted}</span>
-                </span>
+                </DateTimeContainer>
               </div>
             </NextAppointment>
           )}

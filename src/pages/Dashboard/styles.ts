@@ -229,3 +229,11 @@ export const IconContainer = styled.span`
     color: #ff9000 !important;
   }
 `;
+
+export const DateTimeContainer = styled.span`
+  display: flex;
+
+  > span {
+    margin-left: 20px !important;
+  }
+`;
