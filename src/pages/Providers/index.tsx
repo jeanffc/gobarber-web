@@ -50,7 +50,7 @@ const Providers: React.FC = () => {
 
       <Content>
         <Schedule>
-          <h1>Select a barber</h1>
+          <h1>Select a Barber</h1>
 
           <Section>
             {providers.length === 0 && <p>No barbers</p>}

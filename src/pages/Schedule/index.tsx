@@ -167,6 +167,18 @@ const Schedule: React.FC = () => {
             >
               14:00
             </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 15}
+              onClick={() => handleHourChange(15)}
+            >
+              15:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 16}
+              onClick={() => handleHourChange(16)}
+            >
+              16:00
+            </SelectHourButton>
           </Section>
 
           <Section>
