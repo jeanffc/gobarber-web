@@ -1,6 +1,19 @@
-# 🎓 GoBarber
+<div align="center">
+    <img src="https://gobarber-web-one.vercel.app/static/media/logo.a49b07ec.svg" width="300px"/>
+</div>
 
-This is a study project
+<p align="center">
+  <a href="https://github.com/jeanffc/gobarber-web">Front-end</a>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/jeanlsilva/wddm-120-capstone">Back-end</a>
+  </p>
+
+# 🎓 GoBarber (Front-end)
+
+This is a study project based on a Barber shop:
+
+- To see the web client, click here: [GoBarber Web](https://github.com/jeanffc/gobarber-web)
+- To see the mobile client, click here: [GoBarber API](https://github.com/jeanlsilva/wddm-120-capstone)
 
 ## 📌 Technologies
 
