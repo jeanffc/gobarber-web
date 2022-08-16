@@ -23,6 +23,7 @@ import {
   IconContainer
 } from './styles';
 import EditModal from '../../components/EditModal';
+import DeleteDialog from '../../components/DeleteDialog';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -44,6 +45,7 @@ export interface Appointments {
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedAppointment, setSelectedAppointment] = useState({} as Appointments);
@@ -97,7 +99,7 @@ const Dashboard: React.FC = () => {
             return {
               ...appointment,
               hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
-              dateFormatted: format(parseISO(appointment.date), 'yyyy-MM-dd'),
+              dateFormatted: format(parseISO(appointment.date), 'MM/dd/yyyy'),
             };
           });
 
@@ -123,7 +125,7 @@ const Dashboard: React.FC = () => {
   }, [currentMonth, monthAvailability]);
 
   const selectedDateAsText = useMemo(() => {
-    return format(selectedDate, "'Day' dd 'of' MMMM", {
+    return format(selectedDate, "MMMM dd", {
       locale: enCA,
     });
   }, [selectedDate]);
@@ -155,6 +157,11 @@ const Dashboard: React.FC = () => {
   const editAppointment = (data: Appointments) => {
     setSelectedAppointment(data);
     setModalIsOpen(true);
+  }
+
+  const deleteAppointment = (data: Appointments) => {
+    setSelectedAppointment(data);
+    setDialogIsOpen(true);
   }
 
   return (
@@ -219,7 +226,7 @@ const Dashboard: React.FC = () => {
                   <IconContainer onClick={() => editAppointment(appointment)}>
                     <FiEdit color="#f4ede8" />
                   </IconContainer>
-                  <IconContainer>
+                  <IconContainer onClick={() => deleteAppointment(appointment)}>
                     <FiTrash color="#f4ede8" />
                   </IconContainer>
                 </div>
@@ -255,7 +262,7 @@ const Dashboard: React.FC = () => {
                   <IconContainer onClick={() => editAppointment(appointment)}>
                     <FiEdit color="#f4ede8" />
                   </IconContainer>
-                  <IconContainer>
+                  <IconContainer onClick={() => deleteAppointment(appointment)}>
                     <FiTrash color="#f4ede8" />
                   </IconContainer>
                 </div>
@@ -287,6 +294,11 @@ const Dashboard: React.FC = () => {
         setModalIsOpen={setModalIsOpen}
         initialDate={selectedDate}
         appointment={selectedAppointment}
+      />
+      <DeleteDialog
+        dialogIsOpen={dialogIsOpen}
+        setDialogIsOpen={setDialogIsOpen}
+        appointmentId={selectedAppointment._id}
       />
     </Container>
   );

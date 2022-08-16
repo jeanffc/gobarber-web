@@ -98,7 +98,7 @@ const EditModal: React.FC<EditModalProps> = ({ modalIsOpen, setModalIsOpen, init
       addToast({
         type: 'success',
         title: 'Success',
-        description: 'Congratulations!',
+        description: 'Appointment successfully updated!',
       });
 
       history.push('/');
