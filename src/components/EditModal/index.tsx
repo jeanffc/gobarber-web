@@ -1,9 +1,18 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
+
 import { format, isToday } from 'date-fns';
 import enCA from 'date-fns/locale/en-CA';
 import Modal from 'react-modal';
 import Button from '../Button';
-import { CloseButton, Content, Calender, ContentSchedule, Section, SelectHourButton } from './styles';
+import {
+  CloseButton,
+  Content,
+  Calender,
+  ContentSchedule,
+  Section,
+  SelectHourButton,
+} from './styles';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
 import { useHistory, Link } from 'react-router-dom';
@@ -19,6 +28,8 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    padding: '40px',
+    borderRadius: '20px',
   },
 };
 
@@ -36,14 +47,19 @@ interface MonthAvailabilityItem {
   available: boolean;
 }
 
-const EditModal: React.FC<EditModalProps> = ({ modalIsOpen, setModalIsOpen, initialDate, appointment }) => {
+const EditModal: React.FC<EditModalProps> = ({
+  modalIsOpen,
+  setModalIsOpen,
+  initialDate,
+  appointment,
+}) => {
   const [selectedHour, setSelectedHour] = useState(8);
   const [selectedDate, setSelectedDate] = useState(initialDate);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [monthAvailability, setMonthAvailability] = useState<
-  MonthAvailabilityItem[]
->([]);
+    MonthAvailabilityItem[]
+  >([]);
   const { addToast } = useToast();
   const history = useHistory();
 
@@ -91,7 +107,7 @@ const EditModal: React.FC<EditModalProps> = ({ modalIsOpen, setModalIsOpen, init
     try {
       const data = {
         date: new Date(selectedDate.setHours(selectedHour, 0, 0)),
-      }
+      };
 
       await api.put(`/appointments/${appointment._id}`, data);
 
@@ -109,7 +125,7 @@ const EditModal: React.FC<EditModalProps> = ({ modalIsOpen, setModalIsOpen, init
         description: 'An error occurred while schedulling, check your details',
       });
     }
-  }
+  };
 
   useEffect(() => {
     setSelectedHour(new Date(appointment.date).getHours());
@@ -123,82 +139,84 @@ const EditModal: React.FC<EditModalProps> = ({ modalIsOpen, setModalIsOpen, init
       contentLabel="Edit Appointment"
       onRequestClose={() => setModalIsOpen(false)}
     >
-      <CloseButton onClick={() => setModalIsOpen(false)}>x</CloseButton>
+      <CloseButton onClick={() => setModalIsOpen(false)}>
+        <AiFillCloseCircle color="#f4ede8" />
+      </CloseButton>
       <Content>
         <ContentSchedule>
-            <h1>Select a Date</h1>
-            <p>
-              {isToday(selectedDate) && <span>Today</span>}
-              <span>{selectedDateAsText}</span>
-              <span>{selectedWeekDay}</span>
-            </p>
+          <h1>Select a Date</h1>
+          <p>
+            {isToday(selectedDate) && <span>Today</span>}
+            <span>{selectedDateAsText}</span>
+            <span>{selectedWeekDay}</span>
+          </p>
 
-            <Section>
-              <strong>Morning</strong>
-              <SelectHourButton
-                selected={selectedHour === 8}
-                onClick={() => handleHourChange(8)}
-              >
-                08:00
-              </SelectHourButton>
-              <SelectHourButton
-                selected={selectedHour === 9}
-                onClick={() => handleHourChange(9)}
-              >
-                09:00
-              </SelectHourButton>
-              <SelectHourButton
-                selected={selectedHour === 10}
-                onClick={() => handleHourChange(10)}
-              >
-                10:00
-              </SelectHourButton>
-              <SelectHourButton
-                selected={selectedHour === 11}
-                onClick={() => handleHourChange(11)}
-              >
-                11:00
-              </SelectHourButton>
-            </Section>
+          <Section>
+            <strong>Morning</strong>
+            <SelectHourButton
+              selected={selectedHour === 8}
+              onClick={() => handleHourChange(8)}
+            >
+              08:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 9}
+              onClick={() => handleHourChange(9)}
+            >
+              09:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 10}
+              onClick={() => handleHourChange(10)}
+            >
+              10:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 11}
+              onClick={() => handleHourChange(11)}
+            >
+              11:00
+            </SelectHourButton>
+          </Section>
 
-            <Section>
-              <strong>Afternoon</strong>
-              <SelectHourButton
-                selected={selectedHour === 13}
-                onClick={() => handleHourChange(13)}
-              >
-                13:00
-              </SelectHourButton>
-              <SelectHourButton
-                selected={selectedHour === 14}
-                onClick={() => handleHourChange(14)}
-              >
-                14:00
-              </SelectHourButton>
-            </Section>
+          <Section>
+            <strong>Afternoon</strong>
+            <SelectHourButton
+              selected={selectedHour === 13}
+              onClick={() => handleHourChange(13)}
+            >
+              13:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 14}
+              onClick={() => handleHourChange(14)}
+            >
+              14:00
+            </SelectHourButton>
+          </Section>
 
-            <Section>
-              <Button loading={loading} onClick={handleSubmit}>
-                Save Schedule
-              </Button>
-            </Section>
-          </ContentSchedule>
-          <Calender>
-            <DayPicker
-              weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-              fromMonth={new Date()}
-              disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-              modifiers={{
-                available: { daysOfWeek: [1, 2, 3, 4, 5] },
-              }}
-              onMonthChange={handleMonthChange}
-              selectedDays={selectedDate}
-              onDayClick={handleDateChange}
-            />
-          </Calender>
-        </Content>
+          <Section>
+            <Button loading={loading} onClick={handleSubmit}>
+              Save Schedule
+            </Button>
+          </Section>
+        </ContentSchedule>
+        <Calender>
+          <DayPicker
+            weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+            fromMonth={new Date()}
+            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
+            modifiers={{
+              available: { daysOfWeek: [1, 2, 3, 4, 5] },
+            }}
+            onMonthChange={handleMonthChange}
+            selectedDays={selectedDate}
+            onDayClick={handleDateChange}
+          />
+        </Calender>
+      </Content>
     </Modal>
-  )
-}
+  );
+};
 
 export default EditModal;

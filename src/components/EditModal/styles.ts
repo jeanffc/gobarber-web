@@ -136,8 +136,8 @@ export const Calender = styled.aside`
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: 0;
-  right: 5px;
+  top: 15px;
+  right: 15px;
   background: transparent;
   color: #ffffff;
   border: 0;
