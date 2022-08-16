@@ -1,21 +1,21 @@
-import React, { useCallback, useRef, useState, ChangeEvent } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { FiUser, FiMail, FiLock, FiCamera, FiArrowLeft } from "react-icons/fi";
-import { Form } from "@unform/web";
-import { FormHandles } from "@unform/core";
-import * as Yup from "yup";
+import React, { useCallback, useRef, useState, ChangeEvent } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import { FiUser, FiMail, FiLock, FiCamera, FiArrowLeft } from 'react-icons/fi';
+import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
-import { useToast } from "../../hooks/toast";
-import { useAuth } from "../../hooks/auth";
+import { useToast } from '../../hooks/toast';
+import { useAuth } from '../../hooks/auth';
 
-import getValidationErrors from "../../utils/getValidationErrors";
+import getValidationErrors from '../../utils/getValidationErrors';
 
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import { Container, Content, AvatarInput } from "./styles";
+import { Container, Content, AvatarInput } from './styles';
 
 interface ProfileFormData {
   name: string;
@@ -41,23 +41,23 @@ const Profile: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string().required("Nome obrigatório"),
+          name: Yup.string().required('Name required'),
           email: Yup.string()
-            .email("Digite um e-mail válido")
-            .required("E-mail obrigatório"),
+            .email('Enter a valid email address')
+            .required('E-mail required'),
           old_password: Yup.string(),
-          password: Yup.string().when("old_password", {
+          password: Yup.string().when('old_password', {
             is: val => !!val.length,
-            then: Yup.string().required("Campo obrigatório"),
+            then: Yup.string().required('Field required'),
             otherwise: Yup.string(),
           }),
           password_confirmation: Yup.string()
-            .when("old_password", {
+            .when('old_password', {
               is: val => !!val.length,
-              then: Yup.string().required("Campo obrigatório"),
+              then: Yup.string().required('Field required'),
               otherwise: Yup.string(),
             })
-            .oneOf([Yup.ref("password"), undefined], "Confirmação incorreta"),
+            .oneOf([Yup.ref('password'), undefined], 'Password does not match'),
         });
 
         await schema.validate(data, {
@@ -66,13 +66,8 @@ const Profile: React.FC = () => {
 
         setLoading(true);
 
-        const {
-          name,
-          email,
-          old_password,
-          password,
-          password_confirmation,
-        } = data;
+        const { name, email, old_password, password, password_confirmation } =
+          data;
 
         const formData = {
           name,
@@ -86,22 +81,21 @@ const Profile: React.FC = () => {
             : {}),
         };
 
-        const response = await api.put("/profile", formData);
+        const response = await api.put(`/users/${user._id}`, formData);
 
         updateUser(response.data);
 
-        history.push("/dashboard");
+        history.push('/dashboard');
 
         addToast({
-          type: "success",
-          title: "Perfil atualizado",
-          description:
-            "Suas informações do perfil foram atualizados com sucesso",
+          type: 'success',
+          title: 'Success',
+          description: 'Your profile information has been successfully updated',
         });
 
         setLoading(false);
 
-        history.push("/");
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           setLoading(false);
@@ -114,10 +108,10 @@ const Profile: React.FC = () => {
         }
 
         addToast({
-          type: "error",
-          title: "Erro na atualização",
+          type: 'error',
+          title: 'Error',
           description:
-            "Ocorreu um erro ao atualizar seus dados, tente novamente",
+            'There was an error updating your data, please try again',
         });
       }
     },
@@ -129,14 +123,14 @@ const Profile: React.FC = () => {
       if (e.target.files) {
         const data = new FormData();
 
-        data.append("avatar", e.target.files[0]);
+        data.append('avatar', e.target.files[0]);
 
-        api.patch("/users/avatar", data).then(response => {
+        api.patch('/users/avatar', data).then(response => {
           updateUser(response.data);
 
           addToast({
-            type: "success",
-            title: "Avatar atualizado",
+            type: 'success',
+            title: 'Avatar updated',
           });
         });
       }
@@ -164,7 +158,13 @@ const Profile: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <AvatarInput>
-            <img src={user.avatar_url} alt={user.name} />
+            <img
+              src={
+                user.avatar_url ||
+                'https://gravatar.com/avatar/36511d6bb8cb15087c061866537a0297?s=400&d=robohash&r=x'
+              }
+              alt={user.name}
+            />
             <label htmlFor="avatar">
               <FiCamera />
 
@@ -172,34 +172,34 @@ const Profile: React.FC = () => {
             </label>
           </AvatarInput>
 
-          <h1>Meu perfil</h1>
+          <h1>My profile</h1>
 
-          <Input name="name" icon={FiUser} type="text" placeholder="Nome" />
+          <Input name="name" icon={FiUser} type="text" placeholder="Name" />
           <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
 
           <Input
             name="old_password"
             icon={FiLock}
             type="password"
-            placeholder="Senha atual"
+            placeholder="Current Password"
           />
 
           <Input
             name="password"
             icon={FiLock}
             type="password"
-            placeholder="Nova senha"
+            placeholder="New Password"
           />
 
           <Input
             name="password_confirmation"
             icon={FiLock}
             type="password"
-            placeholder="Confirmar senha"
+            placeholder="Repeat Password"
           />
 
           <Button loading={loading} type="submit">
-            Confirmar mudanças
+            Save
           </Button>
         </Form>
       </Content>

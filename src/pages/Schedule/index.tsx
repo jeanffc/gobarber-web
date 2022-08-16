@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { isToday, format, parseISO, isAfter } from 'date-fns';
+import { isToday, format } from 'date-fns';
 import enCA from 'date-fns/locale/en-CA';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import { FiArrowLeft } from 'react-icons/fi';
@@ -167,11 +167,23 @@ const Schedule: React.FC = () => {
             >
               14:00
             </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 15}
+              onClick={() => handleHourChange(15)}
+            >
+              15:00
+            </SelectHourButton>
+            <SelectHourButton
+              selected={selectedHour === 16}
+              onClick={() => handleHourChange(16)}
+            >
+              16:00
+            </SelectHourButton>
           </Section>
 
           <Section>
             <Button loading={loading} onClick={handleSubmit}>
-              Save Schedule
+              Save
             </Button>
           </Section>
         </ContentSchedule>
